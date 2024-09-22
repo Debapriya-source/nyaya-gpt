@@ -4,7 +4,15 @@ from dotenv import dotenv_values
 import streamlit as st
 from agent import agent
 
-ENVs = dotenv_values()
+# ENVs = dotenv_values()
+
+try:
+    ENVs = dotenv_values(".env")  # for dev env
+    GROQ_API_KEY = ENVs["GROQ_API_KEY"]
+except:
+    ENVs = st.secrets  # for streamlit deployment
+    GROQ_API_KEY = ENVs["GROQ_API_KEY"]
+
 
 os.environ["GROQ_API_KEY"] = ENVs['GROQ_API_KEY']
 os.environ["HUGGINGFACE_API_KEY"] = ENVs['HUGGINGFACE_API_KEY']
