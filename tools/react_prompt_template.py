@@ -12,7 +12,7 @@ def get_prompt_template():
 
             Question: the input question you must answer
 
-            Thought: you should always think about what to do
+            Thought: you should always think about what to do, you can just answer if the question is something basic and not fact-based
 
             Action: the action to take, should be one of [{tool_names}]
 

@@ -19,7 +19,7 @@ def indian_constitution_pdf_query(query: str) -> str:
         model_name="sentence-transformers/all-mpnet-base-v2")
 
     try:
-        db = FAISS.load_local("faiss_index_constitution",
+        db = FAISS.load_local("db/faiss_index_constitution",
                               embeddings_model, allow_dangerous_deserialization=True)
     except:
 
@@ -39,7 +39,7 @@ def indian_constitution_pdf_query(query: str) -> str:
         # print(texts)
 
         db = FAISS.from_texts(texts, embeddings_model)  # cached_embedder)
-        db.save_local("faiss_index_constitution")
+        db.save_local("db/faiss_index_constitution")
 
     retriever = db.as_retriever(k=4)
     result = retriever.invoke(query)
@@ -58,7 +58,7 @@ def indian_laws_pdf_query(query: str) -> str:
         model_name="sentence-transformers/all-mpnet-base-v2")
 
     try:
-        db = FAISS.load_local("faiss_index_bns",
+        db = FAISS.load_local("db/faiss_index_bns",
                               embeddings_model, allow_dangerous_deserialization=True)
     except:
         # if len(list(store.yield_keys())) == 0:
@@ -79,7 +79,7 @@ def indian_laws_pdf_query(query: str) -> str:
         # print(texts)
 
         db = FAISS.from_texts(texts, embeddings_model)
-        db.save_local("faiss_index_bns")
+        db.save_local("db/faiss_index_bns")
 
     retriever = db.as_retriever(k=4)
     result = retriever.invoke(query)
