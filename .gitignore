@@ -1,2 +1,3 @@
 /langchain
 .env
+__pycache__
