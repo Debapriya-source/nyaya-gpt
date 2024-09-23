@@ -11,5 +11,5 @@
 - [streamlit👑](https://streamlit.io/)
 
 ## Demo
+https://github.com/user-attachments/assets/52bad62f-6039-44cb-ae80-281f535c16ce
 
-![Demo](./readme%20assets/nyaya-gpt.mp4)
