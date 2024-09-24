@@ -60,7 +60,12 @@ if prompt := st.chat_input("What is your query?"):
     st.chat_message("⚖️").markdown("Thinking...")
 
     store.append(HumanMessage(content=prompt))
-    response = AIMessage(content=agent(prompt))
+    try:
+        response = AIMessage(content=agent(prompt))
+    except:
+        response = AIMessage(
+            content="Sorry, I am not able to answer your query due to high traffic (APII Limit Exceeded)")
+    # response = AIMessage(content=agent(prompt))
     store.append(response)
 
     # Display assistant response in chat message container
