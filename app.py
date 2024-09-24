@@ -64,7 +64,7 @@ if prompt := st.chat_input("What is your query?"):
         response = AIMessage(content=agent(prompt))
     except:
         response = AIMessage(
-            content="Sorry, I am not able to answer your query due to high traffic (APII Limit Exceeded)")
+            content="Sorry, I am not able to answer your query due to high traffic (API Limit Exceeded)")
     # response = AIMessage(content=agent(prompt))
     store.append(response)
 
