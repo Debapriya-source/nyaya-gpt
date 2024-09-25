@@ -11,7 +11,7 @@ def agent(query: str):
     warnings.filterwarnings("ignore", category=FutureWarning)
 
     # LLM = ChatGroq(model="llama-3.1-70b-versatile")
-    LLM = ChatGroq(model="llama3-8b-8192")
+    LLM = ChatGroq(model="llama3-8b-8192")  # for  more api limit
 
     # query = input("Enter your query: ")
 
