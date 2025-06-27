@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama-server
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+      - ./models:/models  # Optional: for sharing model files
+    environment:
+      - OLLAMA_ORIGINS=*  # Allow connections from any origin
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_PORT=11434
+    restart: unless-stopped
+    # Uncomment the following lines if you have NVIDIA GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # Optional: Your Streamlit app in Docker
+  nyaya-gpt:
+    build: .
+    container_name: nyaya-gpt-app
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./tools/data:/app/tools/data
+      - ./db:/app/db
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+      # Point to Docker OLLAMA service
+      - OLLAMA_BASE_URL=http://ollama:11434
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
+    driver: local
