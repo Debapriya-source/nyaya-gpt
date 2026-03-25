@@ -1,4 +1,18 @@
-/langchain
-.env
-__pycache__
+# Python
+__pycache__/
 .venv/
+*.pyc
+
+# Environment
+.env
+
+# Node
+frontend/node_modules/
+frontend/.next/
+
+# IDE
+.idea/
+.vscode/
+
+# Legacy
+/langchain

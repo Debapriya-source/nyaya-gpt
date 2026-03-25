@@ -2,6 +2,7 @@ from langchain.prompts import PromptTemplate
 
 
 def get_prompt_template():
+    """Return the ReAct prompt template for the legal AI agent."""
     return PromptTemplate.from_template(
         """
             Answer the following questions as best you can. You have access to the following tools:

@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
@@ -21,13 +21,10 @@ RUN uv sync --frozen --no-dev --no-editable
 COPY . .
 
 # Create necessary directories
-RUN mkdir -p db tools/data
+RUN mkdir -p db data
 
-# Expose Streamlit port
-EXPOSE 8501
+EXPOSE 8000
 
-# Health check
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+HEALTHCHECK CMD curl --fail http://localhost:8000/api/health
 
-# Run the application
-CMD ["uv", "run", "streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
